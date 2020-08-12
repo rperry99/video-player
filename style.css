@@ -1,5 +1,5 @@
 :root {
-  --primary-color: dodgerblue;
+  --primary-color: #306844;
   --font-color: white;
 }
 
@@ -11,7 +11,7 @@ body {
   margin: 0;
   min-height: 100vh;
   background-color: #e3e3e3;
-  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234f4f51' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23306844' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +35,8 @@ body {
 
 video {
   border-radius: 5px;
-
+  width: 100%;
+  height: auto;
 }
 
 /* Containers */
@@ -60,10 +61,7 @@ video {
   z-index: 5;
   display: flex;
   justify-content: space-between;
-
 }
-
-
 
 .control-group {
   width: 100%;
@@ -83,17 +81,13 @@ video {
 
 /* Progress Bar */
 .progress-range {
-
   margin: auto;
   border-radius: 10px;
   position: absolute;
   left: 15px;
   top: 15px;
   cursor: pointer;
-
 }
-
-
 
 .progress-bar {
   background: var(--primary-color);
@@ -166,10 +160,7 @@ video {
   margin-right: 15px;
 }
 
-
-
 select {
-
   color: var(--font-color);
   border: none;
   font-size: 18px;
@@ -177,8 +168,6 @@ select {
   top: -2.5px;
   border-radius: 5px;
 }
-
-
 
 select > option {
   background: rgba(0, 0, 0, 0.9);
@@ -207,7 +196,10 @@ select > option {
 
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 600px) {
-
+  .player {
+    min-width: 0;
+    max-width: 95vw;
+  }
 
   .fas {
     font-size: 20px;
