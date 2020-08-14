@@ -9,17 +9,18 @@ const currentTime = getEl('.time-elapsed');
 const durationTime = getEl('.time-duration');
 const fullscreenBtn = getEl('.fullscreen');
 
-// Function to quickly assign element constants --- //
+// Function to quickly assign element constants -------------------------- //
 function getEl(el) {
   return document.querySelector(el);
 }
 
-// Play & Pause ----------------------------------- //
+// Play & Pause ---------------------------------------------------------- //
 function showPlayIcon() {
   playBtn.classList.replace('fa-pause', 'fa-play');
   playBtn.setAttribute('title', 'Play');
 }
 
+// Toggle play vs pause
 function togglePlay() {
   if (video.paused) {
     video.play();
@@ -34,20 +35,30 @@ function togglePlay() {
 // show play button when video ends
 video.addEventListener('ended', showPlayIcon);
 
-// Progress Bar ----------------------------------- //
+// Progress Bar ---------------------------------------------------------- //
+
+// Calculate display time format
+function displayTime(time) {
+  const minutes = Math.floor(time / 60);
+  let seconds = Math.floor(time % 60);
+  seconds = seconds < 10 ? `0${seconds}` : seconds;
+  return `${minutes}:${seconds}`;
+}
 
 // Update Progress bar as video plays
 function updateProgress() {
   progressBar.style.width = `${(video.currentTime / video.duration) * 100}%`;
+  currentTime.textContent = `${displayTime(video.currentTime)} / `;
+  durationTime.textContent = `${displayTime(video.duration)}`;
 }
 
-// Volume Controls -------------------------------- //
+// Volume Controls ------------------------------------------------------- //
 
-// Change Playback Speed -------------------------- //
+// Change Playback Speed ------------------------------------------------- //
 
-// Fullscreen ------------------------------------- //
+// Fullscreen ------------------------------------------------------------ //
 
-// Event Listeners -------------------------------- //
+// Event Listeners ------------------------------------------------------- //
 playBtn.addEventListener('click', togglePlay);
 video.addEventListener('click', togglePlay);
 video.addEventListener('timeupdate', updateProgress);
