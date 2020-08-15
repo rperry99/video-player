@@ -60,6 +60,9 @@ function setProgress(e) {
 }
 
 // Volume Controls ------------------------------------------------------- //
+// Save the last used volume
+let lastVolume = 1;
+let currentVolIcon = '';
 
 // volume bar
 function changeVolume(e) {
@@ -76,11 +79,32 @@ function changeVolume(e) {
   // Change Icon based on volume
   volumeIcon.className = ''; // Resets all classes
   if (volume > 0.7) {
-    volumeIcon.classList.add('fas', 'fa-volume-up');
+    currentVolIcon = 'fa-volume-up';
+    volumeIcon.classList.add('fas', `${currentVolIcon}`);
   } else if (volume < 0.7 && volume > 0) {
-    volumeIcon.classList.add('fas', 'fa-volume-down');
+    currentVolIcon = 'fa-volume-down';
+    volumeIcon.classList.add('fas', `${currentVolIcon}`);
   } else if (volume === 0) {
-    volumeIcon.classList.add('fas', 'fa-volume-off');
+    currentVolIcon = 'fa-volume-off';
+    volumeIcon.classList.add('fas', `${currentVolIcon}`);
+  }
+  lastVolume = volume;
+}
+
+// Mute / Unmute
+function toggleMute() {
+  volumeIcon.className = '';
+  if (video.volume) {
+    lastVolume = video.volume;
+    video.volume = 0;
+    volumeBar.style.width = 0;
+    volumeIcon.classList.add('fas', 'fa-volume-mute');
+    volumeIcon.setAttribute('title', 'Unmute');
+  } else {
+    video.volume = lastVolume;
+    volumeBar.style.width = `${lastVolume * 100}%`;
+    volumeIcon.classList.add('fas', `${currentVolIcon}`);
+    volumeIcon.setAttribute('title', 'Mute');
   }
 }
 
@@ -95,3 +119,4 @@ video.addEventListener('timeupdate', updateProgress);
 video.addEventListener('canplay', updateProgress);
 progressRange.addEventListener('click', setProgress);
 volumeRange.addEventListener('click', changeVolume);
+volumeIcon.addEventListener('click', toggleMute);
