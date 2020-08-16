@@ -8,6 +8,7 @@ const volumeBar = getEl('.volume-bar');
 const currentTime = getEl('.time-elapsed');
 const durationTime = getEl('.time-duration');
 const fullscreenBtn = getEl('.fullscreen');
+const speed = getEl('.player-speed');
 
 // Function to quickly assign element constants -------------------------- //
 function getEl(el) {
@@ -110,6 +111,10 @@ function toggleMute() {
 
 // Change Playback Speed ------------------------------------------------- //
 
+function changeSpeed() {
+  video.playbackRate = speed.value;
+}
+
 // Fullscreen ------------------------------------------------------------ //
 
 // Event Listeners ------------------------------------------------------- //
@@ -120,3 +125,4 @@ video.addEventListener('canplay', updateProgress);
 progressRange.addEventListener('click', setProgress);
 volumeRange.addEventListener('click', changeVolume);
 volumeIcon.addEventListener('click', toggleMute);
+speed.addEventListener('change', changeSpeed);
